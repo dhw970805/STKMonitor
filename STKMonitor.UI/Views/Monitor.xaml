@@ -1,0 +1,97 @@
+﻿<UserControl x:Class="STKMonitor.UI.Views.Monitor"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:STKMonitor.UI.Views"
+             mc:Ignorable="d" 
+             xmlns:prism="http://prismlibrary.com/"
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <Style x:Key="ToolButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="DockPanel.Dock" Value="Top"/>
+            <Setter Property="Width" Value="Auto"/>
+            <Setter Property="BorderThickness" Value="0"/>
+        </Style>
+        <Style x:Key="ToolBottomButtonStyle" TargetType="TextBlock">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="DockPanel.Dock" Value="Bottom"/>
+            <Setter Property="TextAlignment" Value="Center"/>
+            <Setter Property="DockPanel.Dock" Value="Bottom"/>
+            <Setter Property="VerticalAlignment" Value="Bottom"/>
+            <Setter Property="Foreground" Value="DarkGray"/>
+        </Style>
+        <Style TargetType="Border" x:Key="DockBordStyle">
+            <Setter Property="BorderThickness" Value="0 0 1 0"/>
+            <Setter Property="BorderBrush"  Value="DarkGray"/>
+            <Setter Property="Padding" Value="10 0 10 0"/>
+        </Style>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <TabControl>
+                <TabItem Header="文件">
+                    <Grid>
+                        <StackPanel Orientation="Horizontal">
+                            <Grid>
+                                <Border Style="{StaticResource DockBordStyle}">
+                                    <DockPanel>
+                                        <Button Style="{StaticResource ToolButtonStyle}">打开配置</Button>
+                                        <Button Style="{StaticResource ToolButtonStyle}">新建配置</Button>
+                                        <TextBlock Style="{StaticResource ToolBottomButtonStyle}">配置</TextBlock>
+                                    </DockPanel>
+                                </Border>
+                            </Grid>
+                            <Grid>
+                                <Border Style="{StaticResource DockBordStyle}">
+                                    <DockPanel>
+                                        <Button Style="{StaticResource ToolButtonStyle}">开始仿真结果</Button>
+                                        <Button Style="{StaticResource ToolButtonStyle}">综合结果分析</Button>
+                                        <TextBlock Style="{StaticResource ToolBottomButtonStyle}">仿真</TextBlock>
+                                    </DockPanel>
+                                </Border>
+                            </Grid>
+                            <Grid Width="166">
+                                <Border Style="{StaticResource DockBordStyle}">
+                                    <WrapPanel>
+                                        <RadioButton Width="70" GroupName="camp">全部显示</RadioButton>
+                                        <RadioButton Width="70" GroupName="ability" HorizontalAlignment="Center" Margin="5 0 0 0">作战能力</RadioButton>
+                                        <RadioButton Width="70" GroupName="camp">红方</RadioButton>
+                                        <RadioButton Width="70" GroupName="ability" Margin="5 0 0 0">武器系统</RadioButton>
+                                        <RadioButton Width="70" GroupName="camp">蓝方</RadioButton>
+                                    </WrapPanel>
+                                </Border>
+                                <TextBlock Style="{StaticResource ToolBottomButtonStyle}" VerticalAlignment="Bottom" HorizontalAlignment="Center">视角</TextBlock>
+                            </Grid>
+                            <Grid Width="141">
+                                <Border Style="{StaticResource DockBordStyle}">
+                                    <WrapPanel>
+                                        <Button  Style="{StaticResource ToolButtonStyle}" Width="60">上移</Button>
+                                        <Button  Style="{StaticResource ToolButtonStyle}" Width="60" >置顶</Button>
+                                        <Button  Style="{StaticResource ToolButtonStyle}" Width="60">下移</Button>
+                                        <Button  Style="{StaticResource ToolButtonStyle}" Width="60" >置底</Button>
+                                    </WrapPanel>
+                                </Border>
+                                <TextBlock Style="{StaticResource ToolBottomButtonStyle}" VerticalAlignment="Bottom" HorizontalAlignment="Center">位置控制</TextBlock>
+                            </Grid>
+                            <Grid Width="90">
+                                <Border Style="{StaticResource DockBordStyle}">
+                                    <DockPanel>
+                                        <Button Style="{StaticResource ToolButtonStyle}">结果分析</Button>
+                                        <TextBlock Style="{StaticResource ToolBottomButtonStyle}">结果分析</TextBlock>
+                                    </DockPanel>
+                                </Border>
+                            </Grid>
+                        </StackPanel>
+                    </Grid>
+                </TabItem>
+            </TabControl>
+        </Grid>
+    </Grid>
+</UserControl>
