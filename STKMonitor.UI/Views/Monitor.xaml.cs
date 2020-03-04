@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace STKMonitor
+namespace STKMonitor.UI.Views
 {
     /// <summary>
-    /// MainWindow.xaml 的交互逻辑
+    /// Monitor.xaml 的交互逻辑
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class Monitor : UserControl
     {
-        public MainWindow()
+        public Monitor()
         {
             InitializeComponent();
         }
