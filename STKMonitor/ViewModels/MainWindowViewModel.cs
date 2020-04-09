@@ -12,7 +12,7 @@ namespace STKMonitor.ViewModels
     class MainWindowViewModel: BindableBase
     {
         private readonly IRegionManager _regionManager;
-        public string Text { get; set; } = "111";
+        public string Title { get; set; } = "监控工具";
         public MainWindowViewModel(IRegionManager regionManager)
         {
             _regionManager = regionManager;

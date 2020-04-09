@@ -1,4 +1,4 @@
-﻿<Window x:Class="STKMonitor.Views.MainWindow"
+﻿<Window x:Class="STKMonitor.Views.PopMenuWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -7,9 +7,15 @@
         xmlns:prism="http://prismlibrary.com/"
         prism:ViewModelLocator.AutoWireViewModel="True"
         mc:Ignorable="d"
-        Width="1280" Height="860"
-        Title="{Binding Title}">
+        Title="PopMenuWindow" Height="450" Width="800">
     <Grid>
-        <ContentControl prism:RegionManager.RegionName="ContentRegion" Margin="5"  />
+        <Button Width="50" Height="50" Content="Pop">
+            
+        </Button>
+        <Grid Background="Red" Width="200" Height="200">
+            <TextBlock Text="asdasd">
+                
+            </TextBlock>
+        </Grid>
     </Grid>
 </Window>
