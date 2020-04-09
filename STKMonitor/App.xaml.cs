@@ -7,6 +7,7 @@ using STKMonitor.Views;
 using System.Windows;
 using System.Windows.Controls;
 using STKMonitor.UI.ViewModels;
+
 namespace STKMonitor
 {
     /// <summary>
@@ -16,6 +17,7 @@ namespace STKMonitor
     {
         protected override Window CreateShell()
         {
+            return Container.Resolve<PopMenuWindow>();
             return Container.Resolve<MainWindow>();
         }
 

@@ -4,11 +4,56 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:STKMonitor.UI.Views"
+             xmlns:vm="clr-namespace:STKMonitor.UI.ViewModels"
+             xmlns:m="clr-namespace:STKMonitor.UI.Models"
              mc:Ignorable="d" 
              xmlns:prism="http://prismlibrary.com/"
              prism:ViewModelLocator.AutoWireViewModel="True"
+             xmlns:us="clr-namespace:STKMonitor.UI.UserControls"
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
+        <Style x:Key="MyItemsControlStyle" TargetType="ItemsControl">
+            <Setter Property="ItemsPanel">
+                <Setter.Value>
+                    <ItemsPanelTemplate>
+                        <Canvas Height="40"/>
+                    </ItemsPanelTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="ItemContainerStyle">
+                <Setter.Value>
+                    <Style>
+                        <Setter Property="Canvas.Left" Value="{Binding StartTime}" />
+                        <Setter Property="Canvas.Top" Value="0"/>
+                    </Style>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="ItemTemplate">
+                <Setter.Value>
+                    <DataTemplate DataType="m:Behaviour">
+                        <Border Height="30" Background="Red" Width="{Binding LastTime}" BorderThickness="1" BorderBrush="Black">
+                            <TextBlock Text="{Binding Name}"/>
+                        </Border>
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="RulerStyle" TargetType="ItemsControl">
+            <Setter Property="ItemsPanel">
+                <Setter.Value>
+                    <ItemsPanelTemplate>
+                        <Canvas Height="40" Background="Yellow" ClipToBounds="True" VerticalAlignment="Top"></Canvas>
+                    </ItemsPanelTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="ItemTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <Line X1="{Binding Seconds}" X2="{Binding Seconds}" Y1="0" Y2="{Binding Length}" StrokeThickness="2" Stroke="Black"></Line>
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
         <Style x:Key="ToolButtonStyle" TargetType="Button">
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="DockPanel.Dock" Value="Top"/>
@@ -34,7 +79,8 @@
             <RowDefinition Height="100"></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0">
+        <!--顶部工具栏-->
+        <Canvas Grid.Row="0">
             <TabControl>
                 <TabItem Header="文件">
                     <Grid>
@@ -92,6 +138,78 @@
                     </Grid>
                 </TabItem>
             </TabControl>
+        </Canvas>
+        <Grid Grid.Row="1" ShowGridLines="True">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="168"></ColumnDefinition>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="200"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <ListView ItemsSource="{Binding ArmSystems}" Grid.Row="1">
+                    <ListView.ItemTemplate>
+                        <DataTemplate >
+                            <TextBlock Text="{Binding Name}" Height="40"></TextBlock>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Grid>
+            <Grid Grid.Column="1" Name="LineGrid">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0" Panel.ZIndex="2" Grid.RowSpan="2">
+                    <ItemsControl ItemsSource="{Binding Rulersss}" Style="{StaticResource RulerStyle}">
+                    </ItemsControl>
+                    <Line Stroke="GreenYellow" StrokeThickness="3" X1="100" X2="100" Y1="0" Y2="{Binding ElementName=LineGrid, Path=ActualHeight}"></Line>
+                </Grid>
+                <Grid Grid.Row="1">
+                    <ListView ItemsSource="{Binding ArmSystems}">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ItemsControl ItemsSource="{Binding Behaviours}" Style="{StaticResource MyItemsControlStyle}"/>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </Grid>
+                
+            </Grid>
+            <Grid Grid.Column="2" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <!--Behaviours   ArmSystems-->
+                <ListView ItemsSource="{Binding ArmSystems}" Grid.Row="1">
+                    <ListView.ItemTemplate>
+                        <DataTemplate >
+                            <ListView ItemsSource="{Binding Behaviours}">
+                                <ListView.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <StackPanel Orientation="Horizontal"></StackPanel>
+                                    </ItemsPanelTemplate>
+                                </ListView.ItemsPanel>
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal" Height="30">
+                                            <TextBlock Text="{Binding Path=Name}"></TextBlock>
+                                            <TextBlock Text="   起始时间 "></TextBlock>
+                                            <TextBlock Text="{Binding StartTime}"></TextBlock>
+                                            <TextBlock Text="   结束时间 " ></TextBlock>
+                                            <TextBlock Text="{Binding LastTime}" ></TextBlock>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Grid>
         </Grid>
     </Grid>
 </UserControl>
